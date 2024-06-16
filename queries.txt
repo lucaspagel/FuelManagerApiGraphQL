@@ -1,0 +1,166 @@
+query getVeiculos {
+  veiculos {
+    id
+    marca
+    modelo
+    placa
+    consumos{
+      id,
+      data,
+      valor,
+    }
+  },
+}
+
+query getVeiculoById {
+  veiculos(where: { id: { eq: 1 } }) {
+    id
+    placa
+    anoFabricacao
+    anoModelo
+  }
+}
+
+query getVeiculoByMarca {
+  veiculos(
+    where: { marca: { eq: "Fiat" } }, 
+    order: [{ modelo: ASC }]
+  ){
+    id
+    marca
+    modelo
+    placa
+    anoFabricacao
+    anoModelo
+  }
+}
+
+mutation addVeiculo {
+  addVeiculo(
+    model: {
+      id: 0
+      marca: "Chevrolet"
+      modelo: "Sonic"
+      placa: "XXX-1234"
+      anoFabricacao: 2013
+      anoModelo: 2014
+    }
+  ) {
+    id
+  }
+}
+
+mutation updateVeiculo {
+  updateVeiculo(
+    model: {
+      id: 1
+      marca: "Kia"
+      modelo: "Picanto"
+      placa: "XXX-1234"
+      anoFabricacao: 2007
+      anoModelo: 2007
+    }
+  ) {
+    id
+    marca
+    modelo
+    placa
+    anoFabricacao
+    anoModelo
+  }
+}
+
+mutation deleteVeiculo {
+  deleteVeiculo(
+    id: 2
+  ) {
+    id
+    marca
+    modelo
+    placa
+    anoFabricacao
+    anoModelo
+  }
+}
+
+
+query getConsumos {
+    consumos{
+       id,
+       data,
+       valor,
+       tipo,
+       veiculo{
+        id,
+        marca,
+
+       }
+    }  
+}
+
+query getConsumoById {
+  consumos(where: { id: { eq: 1 } }) {
+      id,
+       data,
+       valor,
+       tipo,
+  }
+}
+
+mutation addConsumo {
+  addConsumo(
+    model: {
+      id: 0
+      data: "01/12/2023"
+      valor: 65.50
+      tipo: GASOLINA
+      veiculoId: 1
+    }
+  ) {
+    id
+  }
+}
+
+mutation updateConsumo {
+  updateConsumo(
+    model: {
+      id: 1
+      data: "01/06/2024"
+      valor: 10.50
+      tipo: GASOLINA
+      veiculoId: 1
+    }
+  ) {
+    id
+    data
+    valor
+    tipo
+    veiculoId
+  }
+}
+
+mutation deleteConsumo {
+  deleteConsumo(
+    id: 2
+  ) {
+    id
+    data
+    valor
+    tipo
+    veiculoId
+  }
+}
+
+query getVeiculoByAnoModelo {
+  veiculos(
+    where: { anoModelo: { eq: 2014 } }, 
+    order: [{ modelo: ASC }]
+  ){
+    id
+    marca
+    modelo
+    placa
+    anoFabricacao
+    anoModelo
+  }
+}
