@@ -1,0 +1,49 @@
+input NewVeiculo {
+	marca:         String!
+	modelo:        String!
+	placa:       String!
+	anoFabricacao: Int!
+	anoModelo:     Int!
+}
+
+type Veiculo {
+	id:            ID!
+	marca:         String!
+	modelo:        String!
+	placa:       String!
+	anoFabricacao: Int!
+	anoModelo:     Int!
+
+	consumos: [Consumo]
+}
+
+input NewConsumo {
+	data:  String!
+	valor: Float!
+	tipo:  Int!
+
+	veiculoId: Int!
+}
+
+type Consumo {
+	id:    ID!
+	data:  String!
+	valor: Float!
+	tipo:  Int!
+
+	veiculoId: String!
+
+	veiculo: Veiculo
+}
+
+type Query {
+	veiculos: [Veiculo!]!
+	veiculo(id: ID!): Veiculo!
+	consumos: [Consumo!]!
+	# consumo: Consumo!
+}
+
+type Mutation {
+	createVeiculo(input: NewVeiculo!): Veiculo!
+	createConsumo(input: NewConsumo!): Consumo!
+}
